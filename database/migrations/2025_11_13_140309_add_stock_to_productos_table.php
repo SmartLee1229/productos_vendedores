@@ -9,21 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
-{
-    Schema::table('productos', function (Blueprint $table) {
-        $table->integer('stock')->default(0);
-    });
-}
+    public function up(): void
+    {
+        Schema::table('productos', function (Blueprint $table) {
+            $table->integer('stock')->default(0);
+        });
+    }
 
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('productos', function (Blueprint $table) {
-            //
+            $table->dropColumn('stock');
         });
     }
 };
