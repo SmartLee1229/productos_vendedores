@@ -1,23 +1,30 @@
 @extends('layouts.app')
 
+@section('title','Crear Categoría')
+
 @section('content')
-<div class="container mt-4">
-    <h3>Crear Categoría</h3>
+<div class="card shadow">
+    <div class="card-header bg-success text-white"><h4>Crear Categoría</h4></div>
+    <div class="card-body">
+        @if($errors->any())
+            <div class="alert alert-danger"><ul>@foreach($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul></div>
+        @endif
 
-    <form action="{{ route('categorias.store') }}" method="POST">
-        @csrf
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripción</label>
-            <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a href="{{ route('categorias.index') }}" class="btn btn-secondary">Cancelar</a>
-    </form>
+        <form action="{{ route('categorias.store') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input type="text" name="nombre" class="form-control" required value="{{ old('nombre') }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Descripción</label>
+                <textarea name="descripcion" class="form-control">{{ old('descripcion') }}</textarea>
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-primary" type="submit">Guardar</button>
+                <a href="{{ route('categorias.index') }}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
 </div>
 @endsection

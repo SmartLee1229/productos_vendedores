@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="card shadow">
-    <div class="card-header bg-success text-white"><h4>CREAR VENDEDOR</h4></div>
+    <div class="card-header bg-success text-white"><h4>Crear Vendedor</h4></div>
     <div class="card-body">
         @if($errors->any())
             <div class="alert alert-danger"><ul>@foreach($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul></div>

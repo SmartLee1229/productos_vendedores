@@ -21,16 +21,13 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|string|max:255',
+            'nombre' => 'required|max:255',
             'descripcion' => 'nullable|string',
+            
         ]);
 
-        Categoria::create([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-        ]);
-
-        return redirect()->route('categorias.index')->with('success', 'Categoría creada exitosamente.');
+        Categoria::create($request->all());
+        return redirect()->route('categorias.index')->with('success','Categoría creada correctamente.');
     }
 
     public function edit(Categoria $categoria)
@@ -41,21 +38,22 @@ class CategoriaController extends Controller
     public function update(Request $request, Categoria $categoria)
     {
         $request->validate([
-            'nombre' => 'required|string|max:255',
+            'nombre' => 'required|max:255',
             'descripcion' => 'nullable|string',
+            
         ]);
 
-        $categoria->update([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-        ]);
-
-        return redirect()->route('categorias.index')->with('success', 'Categoría actualizada correctamente.');
+        $categoria->update($request->all());
+        return redirect()->route('categorias.index')->with('success','Categoría actualizada correctamente.');
     }
 
     public function destroy(Categoria $categoria)
     {
+        if ($categoria->productos()->count() > 0) {
+            return redirect()->route('categorias.index')->with('error','No puedes eliminar esta categoría porque tiene productos asociados.');
+        }
+
         $categoria->delete();
-        return redirect()->route('categorias.index')->with('success', 'Categoría eliminada correctamente.');
+        return redirect()->route('categorias.index')->with('success','Categoría eliminada correctamente.');
     }
 }

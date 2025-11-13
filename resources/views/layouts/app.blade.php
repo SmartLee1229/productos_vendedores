@@ -9,7 +9,7 @@
 <body class="bg-light">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('productos.index') }}">Productos Vendedores</a>
+        <a class="navbar-brand" href="{{ route('productos.index') }}">Productos Vendedores Y Categorias</a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="nav">
             <ul class="navbar-nav ms-auto">

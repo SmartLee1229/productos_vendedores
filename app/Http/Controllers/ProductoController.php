@@ -60,3 +60,4 @@ class ProductoController extends Controller
         return redirect()->route('productos.index')->with('success','Producto eliminado correctamente.');
     }
 }
+
