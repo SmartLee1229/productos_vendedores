@@ -9,9 +9,5 @@ class Vendedor extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nombre',
-        'cargo',
-        'telefono',
-    ];
+    protected $fillable = ['nombre','cargo','telefono'];
 }

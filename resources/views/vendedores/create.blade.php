@@ -1,29 +1,34 @@
-@extends('layout')
+@extends('layouts.app')
 
-@section('title', 'Crear Vendedor')
+@section('title','Crear Vendedor')
 
 @section('content')
-<h2 class="mb-4">Nuevo Vendedor</h2>
+<div class="card shadow">
+    <div class="card-header bg-success text-white"><h4>CREAR VENDEDOR</h4></div>
+    <div class="card-body">
+        @if($errors->any())
+            <div class="alert alert-danger"><ul>@foreach($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul></div>
+        @endif
 
-<form action="{{ route('vendedores.store') }}" method="POST" class="card p-4 shadow-sm">
-    @csrf
-
-    <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre:</label>
-        <input type="text" name="nombre" id="nombre" class="form-control" required>
+        <form action="{{ route('vendedores.store') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input type="text" name="nombre" class="form-control" required value="{{ old('nombre') }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Cargo</label>
+                <input type="text" name="cargo" class="form-control" value="{{ old('cargo') }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Teléfono</label>
+                <input type="text" name="telefono" class="form-control" value="{{ old('telefono') }}">
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-primary" type="submit">Guardar</button>
+                <a href="{{ route('vendedores.index') }}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
     </div>
-
-    <div class="mb-3">
-        <label for="cargo" class="form-label">Cargo:</label>
-        <input type="text" name="cargo" id="cargo" class="form-control" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="telefono" class="form-label">Teléfono:</label>
-        <input type="text" name="telefono" id="telefono" class="form-control">
-    </div>
-
-    <button type="submit" class="btn btn-success">Guardar</button>
-    <a href="{{ route('vendedores.index') }}" class="btn btn-secondary">Cancelar</a>
-</form>
+</div>
 @endsection

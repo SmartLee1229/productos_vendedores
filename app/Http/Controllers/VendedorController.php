@@ -27,8 +27,7 @@ class VendedorController extends Controller
         ]);
 
         Vendedor::create($validated);
-
-        return redirect()->route('vendedores.index')->with('success', 'Vendedor creado correctamente.');
+        return redirect()->route('vendedores.index')->with('success','Vendedor creado correctamente.');
     }
 
     public function edit(Vendedor $vendedor)
@@ -45,13 +44,12 @@ class VendedorController extends Controller
         ]);
 
         $vendedor->update($validated);
-
-        return redirect()->route('vendedores.index')->with('success', 'Vendedor actualizado correctamente.');
+        return redirect()->route('vendedores.index')->with('success','Vendedor actualizado correctamente.');
     }
 
     public function destroy(Vendedor $vendedor)
     {
         $vendedor->delete();
-        return redirect()->route('vendedores.index')->with('success', 'Vendedor eliminado correctamente.');
+        return redirect()->route('vendedores.index')->with('success','Vendedor eliminado correctamente.');
     }
 }

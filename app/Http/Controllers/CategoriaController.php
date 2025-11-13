@@ -23,11 +23,11 @@ class CategoriaController extends Controller
         $request->validate([
             'nombre' => 'required|max:255',
             'descripcion' => 'nullable|string',
+            'stock' => 'required|integer|min:0',
         ]);
 
         Categoria::create($request->all());
-
-        return redirect()->route('categorias.index')->with('success', 'Categoría creada correctamente.');
+        return redirect()->route('categorias.index')->with('success','Categoría creada correctamente.');
     }
 
     public function edit(Categoria $categoria)
@@ -40,17 +40,21 @@ class CategoriaController extends Controller
         $request->validate([
             'nombre' => 'required|max:255',
             'descripcion' => 'nullable|string',
+            'stock' => 'required|integer|min:0',
         ]);
 
         $categoria->update($request->all());
-
-        return redirect()->route('categorias.index')->with('success', 'Categoría actualizada correctamente.');
+        return redirect()->route('categorias.index')->with('success','Categoría actualizada correctamente.');
     }
 
     public function destroy(Categoria $categoria)
     {
-        $categoria->delete();
+        // Prevent deletion if has products
+        if ($categoria->productos()->count() > 0) {
+            return redirect()->route('categorias.index')->with('error','No puedes eliminar esta categoría porque tiene productos asociados.');
+        }
 
-        return redirect()->route('categorias.index')->with('success', 'Categoría eliminada correctamente.');
+        $categoria->delete();
+        return redirect()->route('categorias.index')->with('success','Categoría eliminada correctamente.');
     }
 }
